@@ -10,7 +10,10 @@ local plugins = {
 		-- opts = require("config.witch"),
 		opts = {},
 	},
-
+	{
+		"github/copilot.vim",
+		lazy = false,
+	},
 	{
 		"sontungexpt/sttusline",
 		branch = "develop",
@@ -351,6 +354,10 @@ local plugins = {
 			map("n", "<leader>hd2", function() list:remove_at(2) end, { desc = "Delete Harpoon file 2" })
 			map("n", "<leader>hd3", function() list:remove_at(3) end, { desc = "Delete Harpoon file 3" })
 			map("n", "<leader>hd4", function() list:remove_at(4) end, { desc = "Delete Harpoon file 4" })
+			map("n", "<leader>hd5", function() list:remove_at(5) end, { desc = "Delete Harpoon file 5" })
+			map("n", "<leader>hd6", function() list:remove_at(6) end, { desc = "Delete Harpoon file 6" })
+			map("n", "<leader>hd7", function() list:remove_at(7) end, { desc = "Delete Harpoon file 7" })
+			map("n", "<leader>hd8", function() list:remove_at(8) end, { desc = "Delete Harpoon file 8" })
 
 			-- Replace file at index with current buffer
 			map("n", "<leader>hr1", function()

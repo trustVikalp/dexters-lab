@@ -27,9 +27,6 @@ local lsp_servers = {
 		name = "cssls",
 	},
 	{
-		name = "eslint",
-	},
-	{
 		name = "html",
 	},
 	{
