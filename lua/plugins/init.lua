@@ -102,62 +102,58 @@ local plugins = {
 		opts = {},
 	},
 
-	-- OLD vim-floaterm implementation (replaced with nvzone/floaterm for better terminal management)
-	-- {
-	-- 	"voldikss/vim-floaterm",
-	-- 	keys = {
-	-- 		-- Floaterm 1 (main/default)
-	-- 		{ "<leader>tt", "<cmd>FloatermToggle<CR>", desc = "Toggle Main Floaterm" },
-	-- 		{ "<leader>t1", "<cmd>FloatermNew --name=term1<CR>", desc = "Create Term1" },
-	-- 		{ "<leader>to", "<cmd>FloatermToggle term1<CR>", desc = "Toggle Term1" },
-
-	-- 		-- Floaterm 2
-	-- 		{ "<leader>t2", "<cmd>FloatermNew --name=term2<CR>", desc = "Create Term2" },
-	-- 		{ "<leader>tp", "<cmd>FloatermToggle term2<CR>", desc = "Toggle Term2" },
-
-	-- 		-- Floaterm 3
-	-- 		{ "<leader>t3", "<cmd>FloatermNew --name=term3<CR>", desc = "Create Term3" },
-	-- 		{ "<leader>tl", "<cmd>FloatermToggle term3<CR>", desc = "Toggle Term3" },
-
-	-- 		-- Navigation between any terminals
-	-- 		{ "<leader>tj", "<cmd>FloatermNext<CR>", desc = "Next Floaterm" },
-	-- 		{ "<leader>tk", "<cmd>FloatermPrev<CR>", desc = "Prev Floaterm" },
-
-	-- 		-- Go to specific terminals (creates if doesn't exist)
-	-- 		{ "<leader>tg1", "<cmd>FloatermToggle term1<CR>", desc = "Go to Term1" },
-	-- 		{ "<leader>tg2", "<cmd>FloatermToggle term2<CR>", desc = "Go to Term2" },
-	-- 		{ "<leader>tg3", "<cmd>FloatermToggle term3<CR>", desc = "Go to Term3" },
-	-- 		{ "<leader>tg4", "<cmd>FloatermToggle term4<CR>", desc = "Go to Term4" },
-	-- 		{ "<leader>tg5", "<cmd>FloatermToggle term5<CR>", desc = "Go to Term5" },
-	-- 		{ "<leader>tg6", "<cmd>FloatermToggle term6<CR>", desc = "Go to Term6" },
-	-- 	},
-	-- },
-
-	-- NEW nvzone/floaterm implementation for better terminal management
+	-- vim-floaterm implementation (stable index-based navigation)
 	{
-		"nvzone/floaterm",
-		dependencies = "nvzone/volt",
+		"voldikss/vim-floaterm",
+		config = function()
+			-- Configure floaterm settings
+			vim.g.floaterm_title = 'Terminal $1/$2'  -- Shows current/total terminals
+			vim.g.floaterm_width = 0.8
+			vim.g.floaterm_height = 0.8
+		end,
 		keys = {
+			-- Core terminal management
 			{ "<leader>tt", "<cmd>FloatermToggle<CR>", desc = "Toggle Floaterm" },
-			{ "<leader>tg1", function() require("floaterm.api").switch_to_terminal(1) end, desc = "Go to Term1" },
-			{ "<leader>tg2", function() require("floaterm.api").switch_to_terminal(2) end, desc = "Go to Term2" },
-			{ "<leader>tg3", function() require("floaterm.api").switch_to_terminal(3) end, desc = "Go to Term3" },
-			{ "<leader>tg4", function() require("floaterm.api").switch_to_terminal(4) end, desc = "Go to Term4" },
-			{ "<leader>tg5", function() require("floaterm.api").switch_to_terminal(5) end, desc = "Go to Term5" },
-			{ "<leader>tg6", function() require("floaterm.api").switch_to_terminal(6) end, desc = "Go to Term6" },
-		},
-		opts = {
-			size = { h = 60, w = 70 },
-			terminals = {
-				{ name = "Terminal 1" },
-				{ name = "Terminal 2" },
-				{ name = "Terminal 3" },
-				{ name = "Terminal 4" },
-				{ name = "Terminal 5" },
-				{ name = "Terminal 6" },
-			},
+			{ "<leader>tn", "<cmd>FloatermNew<CR>", desc = "Create New Terminal" },
+			
+			-- Navigation between terminals (most stable)
+			{ "<leader>tj", "<cmd>FloatermNext<CR>", desc = "Next Terminal" },
+			{ "<leader>tk", "<cmd>FloatermPrev<CR>", desc = "Previous Terminal" },
+			{ "<leader>tf", "<cmd>FloatermFirst<CR>", desc = "First Terminal" },
+			{ "<leader>tl", "<cmd>FloatermLast<CR>", desc = "Last Terminal" },
+			
+			-- Terminal management
+			{ "<leader>th", "<cmd>FloatermHide<CR>", desc = "Hide Terminal" },
+			{ "<leader>ts", "<cmd>FloatermShow<CR>", desc = "Show Terminal" },
+			{ "<leader>td", "<cmd>FloatermKill<CR>", desc = "Kill Current Terminal" },
 		},
 	},
+
+	-- NEW nvzone/floaterm implementation for better terminal management
+	-- {
+	-- 	"nvzone/floaterm",
+	-- 	dependencies = "nvzone/volt",
+	-- 	keys = {
+	-- 		{ "<leader>tt", "<cmd>FloatermToggle<CR>", desc = "Toggle Floaterm" },
+	-- 		{ "<leader>tg1", function() require("floaterm.api").switch_to_terminal(1) end, desc = "Go to Term1" },
+	-- 		{ "<leader>tg2", function() require("floaterm.api").switch_to_terminal(2) end, desc = "Go to Term2" },
+	-- 		{ "<leader>tg3", function() require("floaterm.api").switch_to_terminal(3) end, desc = "Go to Term3" },
+	-- 		{ "<leader>tg4", function() require("floaterm.api").switch_to_terminal(4) end, desc = "Go to Term4" },
+	-- 		{ "<leader>tg5", function() require("floaterm.api").switch_to_terminal(5) end, desc = "Go to Term5" },
+	-- 		{ "<leader>tg6", function() require("floaterm.api").switch_to_terminal(6) end, desc = "Go to Term6" },
+	-- 	},
+	-- 	opts = {
+	-- 		size = { h = 60, w = 70 },
+	-- 		terminals = {
+	-- 			{ name = "Terminal 1" },
+	-- 			{ name = "Terminal 2" },
+	-- 			{ name = "Terminal 3" },
+	-- 			{ name = "Terminal 4" },
+	-- 			{ name = "Terminal 5" },
+	-- 			{ name = "Terminal 6" },
+	-- 		},
+	-- 	},
+	-- },
 	-- {
 	-- 	"voldikss/vim-floaterm",
 	-- 	lazy = false,
@@ -295,13 +291,13 @@ local plugins = {
 		end,
 	},
 
-	-- {
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	cmd = "Copilot",
-	-- 	event = "InsertEnter",
-	-- 	opts = function() return require("config.copilot") end,
-	-- 	config = function(_, opts) require("copilot").setup(opts) end,
-	-- },
+	{
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		opts = function() return require("config.copilot") end,
+		config = function(_, opts) require("copilot").setup(opts) end,
+	},
 
 	--	{
 	--	"Exafunction/codeium.vim",
